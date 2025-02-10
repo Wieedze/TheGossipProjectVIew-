@@ -1,0 +1,8 @@
+  <li>
+        <a href="/gossips/<%= index + 1 %>/">Potin n°<%= index + 1 %></a>
+        -Titlle : <%= gossip.title %>
+        </br>
+        - <%= gossip.content %>
+        </br>
+        - Auteur : <%= gossip.user.first_name %>
+        </li>
