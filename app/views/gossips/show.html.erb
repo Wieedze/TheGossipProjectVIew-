@@ -10,6 +10,10 @@
     </br>
     <a href="/gossips/<%= params[:id] %>/edit/">Éditer le potin</a>
     </br>
-    <%= link_to "Créer un nouveau gossip", new_gossip_create_path %>
+    <%if @gossip.save%>
+        <div class="alert alert-success" role="alert">
+            Gossip Saved
+        </div>
+        <% end %>
 </body>
 </html>

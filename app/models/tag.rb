@@ -1,3 +1,5 @@
 class Tag < ApplicationRecord
-  belongs_to :gossip
+  has_many :gossip, optional: true
+  validates :title, presence: true
+  validates :title, uniqueness: true
 end

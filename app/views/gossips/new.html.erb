@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Create your Gossip</title>
+</head>
+<body>
+    <h1>Create a Gossip!</h1>
+    <p>Share your gossip via the form below</p>
+    <form action="/gossips" method="POST">
+
+    <%= csrf_meta_tags %>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    Username: <input type="string" name="gossip[user_id]"/><br/>
+    Title : <input type="text" name="gossip[title]"/><br/>
+    Content: <textarea name="gossip[content]"></textarea><br/>
+    <input type="submit" value="Create"/>
+    </form>
+        <% if @gossip.errors.any? %>
+        <% @gossip.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger" role="alert">
+        <li><%= message %></li>
+        </div>
+        <% end %>
+    <% end %>
+</body>
+</html>

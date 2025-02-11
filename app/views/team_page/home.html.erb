@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-html {
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html {
 box-sizing: border-box;
 }
 
 *, *:before, *:after {
 box-sizing: inherit;
+}
+
+.container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .column {
@@ -26,14 +34,26 @@ display: block;
 }
 
 .card {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 padding: 0 16px;
 }
 
 .container::after, .row::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 content: "";
 clear: both;
 display: table;
@@ -58,38 +78,40 @@ width: 100%;
 .button:hover {
 background-color: #555;
 }
-</style>
+    </style>
 </head>
+
 <body>
+    <br>
+    <div class="container-center">
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <%= image_tag 'max.jpg', alt: 'Max', style: 'width:50%' %>
+                    <div class="container">
+                        <h2>Maxime</h2>
+                        <p class="title">CEO & Founder</p>
+                        <p>Devellopment team </p>
+                        <p>maxime@maxime.com</p>
+                        <p><button class="button">Contact</button></p>
+                    </div>
+                </div>
+            </div>
 
-<h2>"Meet The Team"</h2>
-<br>
-
-<div class="row">
-<div class="column">
-<div class="card">
-  <img src="/assets/images/max.jpg" alt="Max" style="width:100%">
-  <div class="container">
-    <h2>Maxime</h2>
-    <p class="title">CEO & Founder</p>
-    <p>Devellopment team </p>
-    <p>maxime@maxime.com</p>
-    <p><button class="button">Contact</button></p>
-  </div>
-</div>
-</div>
-
-<div class="column">
-<div class="card">
-  <img src="/assets/images/sam.png" alt="Sam" style="width:100%">
-  <div class="container">
-    <h2>Samuel chauche</h2>
-    <p class="title">Art Director</p>
-    <p>Artistic director</p>
-    <p>samuel.chauche@gmail.com</p>
-    <p><button class="button">Contact</button></p>
-  </div>
-</div>
-</div>
+            <div class="column">
+                <div class="card">
+                    <%= image_tag 'pp.jpg', alt: 'Sam', style: 'width:50%' %>
+                    <div class="container">
+                        <h2>Samuel chauche</h2>
+                        <p class="title">COO</p>
+                        <p>Founder</p>
+                        <p>samuel.chauche@gmail.com</p>
+                        <p><button class="button">Contact</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
