@@ -47,7 +47,7 @@ end
   )
 end
 
-# Associer des tags à des gossips
+Associer des tags à des gossips
 Gossip.all.each do |gossip|
   gossip.tags << Tag.all.sample(rand(1..3))
 end
