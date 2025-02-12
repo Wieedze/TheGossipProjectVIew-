@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   resources :gossips
-
+  resources :city, only: [ :show ]
   get "author_profil/:first_name", to: "author_profil#profil"
 
   get "/gossips/:id", to: "show#gossip"
-
   get "/team_page/home", to: "team_page#home"
   get "/contact/contact", to: "contact#contact"
   get "/accueil/index", to: "accueil#index"

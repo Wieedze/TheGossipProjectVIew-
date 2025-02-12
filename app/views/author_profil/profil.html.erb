@@ -100,7 +100,7 @@
                     <!-- Statistiques (à adapter selon modèle) -->
                     <div class="row mt-5">
                         <div class="col-4 text-center">
-                            <div class="h2 fw-bold text-primary">42</div>
+                            <div class="h2 fw-bold text-primary"><%=@user.gossips.count%></div>
                             <small class="text-muted">Potins créés</small>
                         </div>
                         <div class="col-4 text-center">
@@ -127,7 +127,12 @@
                                 </li>
                                 <li class="mb-3">
                                     <i class="bi bi-geo-alt me-2 text-primary"></i>
-                                    Paris, France
+                                    <a href="/city/<%= @user.city.name %>/" class="city-link">
+                                        <%= @user.city.name %>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-geo-alt me-2 text-primary"></i>
+                                    <%= @user.age %> ans
                                 </li>
                                 <li class="mb-3">
                                     <i class="bi bi-calendar-event me-2 text-primary"></i>

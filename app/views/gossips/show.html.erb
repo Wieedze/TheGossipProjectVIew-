@@ -83,7 +83,7 @@
     <!-- Header -->
     <div class="gossip-header d-flex justify-content-between align-items-center mb-0">
         <h1 class="h2 mb-0 fw-bold">Potin n°<%= params[:id] %></h1>
-        <a href="/gossips/<%= params[:id] %>/edit/" class="edit-link">
+        <a href="/gossips/<%= params[:id]%>/edit/" class="edit-link">
             <i class="bi bi-pencil-square"></i>Éditer
         </a>
     </div>
@@ -96,6 +96,7 @@
                 <img src="https://i.pravatar.cc/300" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                 
                 <div>
+                    
                     <p class="mb-0">Publié par 
                         <a href="/author_profil/<%= @gossip.user.first_name %>/" class="author-link">
                             <%= @gossip.user.first_name %>
@@ -105,21 +106,37 @@
                         <i class="bi bi-clock me-1"></i>
                         <%= @gossip.created_at.strftime("%d/%m/%Y à %H:%M") %>
                     </small>
+                    <small class="city">
+                        <i class="bi bi-clock me-1"></i>
+                        <%= @gossip.user.city.name %>
+                    </small>
                 </div>
             </div>
 
             <!-- Contenu du potin -->
             <div class="gossip-content mb-4">
+                <p> Title : <%= @gossip.title %></p>
                 <%= @gossip.content %>
-            </div>
 
-            <!-- Alert de succès -->
-            <% if @gossip.save %>
-            <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
-                <i class="bi bi-check-circle-fill"></i>
-                Potin enregistré avec succès !
-            </div>
+            <% if flash[:success] %>
+                <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <%= flash[:success] %>
+                </div>
+            <% elsif flash[:error] %>
+                <div class="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                    <i class="bi bi-x-circle-fill"></i>
+                    <%= flash[:error] %>
+                </div>
             <% end %>
+            <!-- Afficher les erreurs de validation -->
+            <% @gossip.errors.full_messages.each do |message| %>
+                <div class="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                    <i class="bi bi-x-circle-fill"></i>
+                    <%= message %>
+                </div>
+            <% end %>
+            </div>
         </div>
     </div>
 </div>

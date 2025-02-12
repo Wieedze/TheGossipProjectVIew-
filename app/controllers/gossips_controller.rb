@@ -4,11 +4,12 @@ class GossipsController < ApplicationController
   end
 
   def create
-    anonymous_user = User.find_by(first_name: "Anonymous") || User.create(first_name: "Anonymous", last_name: "User", email: "anonymous@example.com")
+    anonymous_user = User.find_by(first_name: "anonymous") || User.create(first_name: "Anonymous", last_name: "User", email: "anonymous@example.com")
     @gossip = Gossip.new(gossip_params)
     @gossip.user = anonymous_user  # Associe le gossip à l'utilisateur anonyme
     if @gossip.save
-      redirect_to @gossip, notice: "Gossip créé !"
+      flash[:success] = "Potin enregistré avec succès !"
+      redirect_to @gossip
     else
       render :new, status: :unprocessable_entity
     end
@@ -18,11 +19,17 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find_by(id: params[:id])
   end
 
+  def edit
+    @gossip = Gossip.find(params[:id])
+  end
+
   def update
     @gossip = Gossip.find(params[:id])
-    if @mgossip.update(gossip_params)
+    if @gossip.update(gossip_params)
+      flash[:success] = "Le potin a été mis à jour avec succès."
       redirect_to @gossip
     else
+      flash[:error] = "La mise à jour a échoué."
       render :edit
     end
   end

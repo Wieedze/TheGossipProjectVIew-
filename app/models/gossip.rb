@@ -7,7 +7,7 @@ class Gossip < ApplicationRecord
 
 
   validates :title, presence: true, length: {
-    minimum: 3, maximum: 14,
+    minimum: 3, maximum: 30,
     message: "Le titre doit faire entre 3 et 14 caractères"
   }
   validates :content, presence: true, length: {

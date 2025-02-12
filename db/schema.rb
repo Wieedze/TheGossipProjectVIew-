@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_131550) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_12_110259) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
@@ -65,7 +65,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_131550) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "city_id", null: false
+    t.index ["city_id"], name: "index_users_on_city_id"
   end
 
   add_foreign_key "gossips", "users"
+  add_foreign_key "users", "cities"
 end

@@ -28,14 +28,20 @@ end
     description: Faker::Lorem.paragraph,
     email: Faker::Internet.email,
     age: rand(18..60),
+    city: City.all.sample
   )
 end
 
 # Créer 20 gossips
 20.times do
-  Gossip.create(
-    title: Faker::Lorem.sentence(word_count: 3),
-    content: Faker::Lorem.paragraph(sentence_count: 5),
+  title = Faker::Lorem.sentence(word_count: rand(1..4)) # Adjust word count as needed
+
+  title = title[0..13] if title.length > 14 # Limit to 14 characters
+  title = title[0..2] if title.length < 3 # Ensure minimum 3 characters
+
+  Gossip.create!(
+    title: title,
+    content: Faker::Lorem.paragraph(sentence_count: rand(1..3)),
     user: User.all.sample
   )
 end
@@ -45,9 +51,4 @@ end
   Tag.create(
     title: "##{Faker::Lorem.word}"
   )
-end
-
-Associer des tags à des gossips
-Gossip.all.each do |gossip|
-  gossip.tags << Tag.all.sample(rand(1..3))
 end
