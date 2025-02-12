@@ -15,4 +15,10 @@
     <div class= "form-group">
         <button type="submit"> Modifier le gossip </button>
     </div>
-<% end %>
+    <%end%>
+
+    <%= form_tag gossip_path(@gossip), method: :delete do %>
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce gossip ?')">Supprimer le gossip</button>
+    </div>
+    <%end%>

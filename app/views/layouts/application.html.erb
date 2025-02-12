@@ -130,6 +130,9 @@
                     <li class="nav-item">
                         <%= link_to "Contact", contact_contact_path, class: "nav-link nav-link-custom #{"active" if current_page?(contact_contact_path)}" %>
                     </li>
+                    <li class="nav-item">
+                        <%= link_to "City", cities_path, class: "nav-link nav-link-custom #{"active" if current_page?(cities_path)}" %>
+                    </li>
                 </ul>
                 <%= link_to "Créer votre Gossip", new_gossip_path, class: "create-btn" %>
             </div>

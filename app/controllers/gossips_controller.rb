@@ -2,6 +2,9 @@ class GossipsController < ApplicationController
   def new
     @gossip = Gossip.new
   end
+  def index
+    @gossip=Gossip.all
+  end
 
   def create
     anonymous_user = User.find_by(first_name: "anonymous") || User.create(first_name: "Anonymous", last_name: "User", email: "anonymous@example.com")
@@ -30,6 +33,18 @@ class GossipsController < ApplicationController
       redirect_to @gossip
     else
       flash[:error] = "La mise à jour a échoué."
+      render :edit
+    end
+  end
+
+  def destroy
+    @gossip = Gossip.find(params[:id])
+    @gossip.destroy
+    if @gossip.destroy
+      flash[:success] = "Le gossip a été supprimé avec succès."
+      redirect_to accueil_index_path, notice:
+    else
+      flash[:error] = "echec"
       render :edit
     end
   end

@@ -78,8 +78,16 @@
 <body>
     <main class="container">
         <!-- Header -->
+        
         <div class="d-flex flex-column h-100 mb-5">
-            <div class="display-6 fw-bold mb-1 gradient-text align-center">Liste des Gossips</div>
+            </br>
+            <% if flash[:success] %>
+                <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <%= flash[:success] %>
+                </div>
+                <%end %>
+            <div class="display-6 fw-bold mb-1 gradient-text align-center"></div>
             </div>
         </div>
 

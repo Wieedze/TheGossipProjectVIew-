@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :gossips
-  resources :city, only: [ :show ]
+  resources :cities, only: [ :index, :show ]
+  
   get "author_profil/:first_name", to: "author_profil#profil"
 
   get "/gossips/:id", to: "show#gossip"

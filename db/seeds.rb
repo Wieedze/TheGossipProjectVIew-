@@ -52,3 +52,11 @@ end
     title: "##{Faker::Lorem.word}"
   )
 end
+
+35.times do
+  Comment.create!(
+    content: Faker::Lorem.paragraph,
+    user: User.all.sample,
+    gossip: Gossip.all.sample
+    )
+end
