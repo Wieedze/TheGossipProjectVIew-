@@ -14,7 +14,7 @@
         }
 
         .custom-title {
-            color: rgb(138, 92, 243);
+            color: rgb(50, 0, 168);
         }
 
         .custom-card {
@@ -24,7 +24,7 @@
         }
 
         .custom-header {
-            color: rgb(31, 0, 59);
+            color: rgb(40, 0, 75);
         }
 
         .custom-card:hover {
@@ -35,7 +35,7 @@
         .card-img-top {
             height: 200px;
             object-fit: cover;
-            border-bottom: 3px solidrgb(0, 0, 0);
+            border-bottom: 2px solid rgb(38, 0, 141);
         }
 
         .gossip-number {
@@ -50,20 +50,27 @@
         }
 
         .author-badge {
-            background: #e9ecef;
+            background: rgb(237, 237, 238);
             color: rgb(0, 29, 58);
             padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
         }
 
-        .btn-lg btn-success rounded-pill px-4":hover {
+        .btn-lg.btn-success.rounded-pill.px-4:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+            box-shadow: 0 6px 12px rgba(255, 28, 28, 0.15) !important;
         }
 
         .footer {
             position: absolute bottom;
+        }
+
+        .new-gossip-btn:hover {
+            background-color: rgb(70, 0, 200);
+            border-color: rgb(70, 0, 200);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
         }
     </style>
 </head>
@@ -71,18 +78,9 @@
 <body>
     <main class="container">
         <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-5">
-            <div class="display-5 fw-bold mb-3 custom-header gradient-text">Liste des potins</div>
-            <%= link_to "Créer un nouveau Gossip", new_gossip_path, class: "btn btn-lg btn-success rounded-pill px-4 new-gossip-btn", style: "background-color: rgb(50, 0, 168); border-color: rgb(50, 0, 168);" %>
-            <style>
-            .new-gossip-btn:hover {
-            background-color: rgb(70, 0, 200);
-            border-color: rgb(70, 0, 200);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
-            }
-            </style>
-        </div>
+        <div class="d-flex flex-column h-100 mb-5">
+            <div class="display-6 fw-bold mb-1 gradient-text align-center">Liste des Gossips</div>
+            </div>
         </div>
 
         <!-- Grid des potins -->

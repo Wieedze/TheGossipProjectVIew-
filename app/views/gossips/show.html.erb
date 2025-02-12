@@ -1,19 +1,129 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Page Potin</title>
+    <title>The Gossip Project - <%= @gossip.title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .gossip-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .gossip-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        .gossip-card {
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: none;
+        }
+
+        .gossip-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #495057;
+        }
+
+        .author-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .author-link:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .edit-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white !important;
+            border-radius: 30px;
+            text-decoration: none !important;
+            transition: transform 0.3s ease;
+        }
+
+        .edit-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .timestamp {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-    <h1>Potin n°<%= params[:id] %></h1>
-    <p>Son Auteur :<a href= "/author_profil/<%=@gossip.user.first_name%>/"> <%= @gossip.user.first_name %> </a></p>
-    <p><%= @gossip.content %></p>
-    <p><%= @gossip.created_at%>
-    </br>
-    <a href="/gossips/<%= params[:id] %>/edit/">Éditer le potin</a>
-    </br>
-    <%if @gossip.save%>
-        <div class="alert alert-success" role="alert">
-            Gossip Saved
+
+<div class="gossip-container">
+    <!-- Header -->
+    <div class="gossip-header d-flex justify-content-between align-items-center mb-0">
+        <h1 class="h2 mb-0 fw-bold">Potin n°<%= params[:id] %></h1>
+        <a href="/gossips/<%= params[:id] %>/edit/" class="edit-link">
+            <i class="bi bi-pencil-square"></i>Éditer
+        </a>
+    </div>
+
+    <!-- Carte principale -->
+    <div class="card gossip-card">
+        <div class="card-body p-4 p-md-5">
+            <!-- Auteur -->
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <img src="https://i.pravatar.cc/300" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                
+                <div>
+                    <p class="mb-0">Publié par 
+                        <a href="/author_profil/<%= @gossip.user.first_name %>/" class="author-link">
+                            <%= @gossip.user.first_name %>
+                        </a>
+                    </p>
+                    <small class="timestamp">
+                        <i class="bi bi-clock me-1"></i>
+                        <%= @gossip.created_at.strftime("%d/%m/%Y à %H:%M") %>
+                    </small>
+                </div>
+            </div>
+
+            <!-- Contenu du potin -->
+            <div class="gossip-content mb-4">
+                <%= @gossip.content %>
+            </div>
+
+            <!-- Alert de succès -->
+            <% if @gossip.save %>
+            <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                Potin enregistré avec succès !
+            </div>
+            <% end %>
         </div>
-        <% end %>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
