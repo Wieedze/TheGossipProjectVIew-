@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :gossips
   resources :cities, only: [ :index, :show ]
-  
+  resources :gossips do
+    resources :comments
+  end
+
   get "author_profil/:first_name", to: "author_profil#profil"
 
   get "/gossips/:id", to: "show#gossip"
@@ -14,3 +15,7 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
+
+
+
+

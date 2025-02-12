@@ -111,6 +111,9 @@
                                 <span class="author-badge">
                                     <i class="bi bi-person-circle"></i> <%= gossip.user.first_name %>
                                 </span>
+                                <span class="Comment Number">
+                                    <i class="bi bi-person-circle"></i>Comment <%= gossip.comment.count %>
+                                </span>
                             </p>
                             <%= link_to "Voir le potin", gossip_path(gossip), class: "btn btn-outline-primary w-100" %>
                         </div>

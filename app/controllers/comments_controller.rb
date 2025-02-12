@@ -17,43 +17,49 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @comment= Comment.find(params[:id])
   end
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    puts "===== DEBUG PARAMS ====="
+    puts params.inspect  # 🔥 Affiche les paramètres reçus dans la console
+    puts "========================"
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: "Comment was successfully created." }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    @comment = Comment.new(comment_params)
+    @comment.gossip = @gossip
+    anonymous_user = User.find_by(first_name: "anonymous")
+    @comment.user = anonymous_user  # Associe le gossip à l'utilisateur anonyme
+
+    if @comment.save
+      flash[:success] = "Commentaire enregistré avec succès !"
+      redirect_to @gossip, notice: "Commentaire ajouté avec succès !"
+    else
+      flash[:error] = "Le commentaire na pas pue etre ajouté ."
+      puts params.inspect
     end
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: "Comment was successfully updated." }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      flash[:success] = "Le commentaire a été mis à jour avec succès."
+      redirect_to @comment
+    else
+      flash[:error] = "La mise à jour a échoué."
+      render :edit
     end
   end
-
   # DELETE /comments/1 or /comments/1.json
   def destroy
     @comment.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to comments_path, status: :see_other, notice: "Comment was successfully destroyed." }
-      format.json { head :no_content }
+    if @comment.destroy
+      flash[:success] = "Le commentaire a été supprimé avec succès."
+      redirect_to accueil_index_path, notice:
+    else
+      flash[:error] = "echec"
+      render :edit
     end
   end
 
@@ -65,6 +71,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.expect(comment: [ :content ])
+      params.require(:comment).permit(:content)
     end
 end

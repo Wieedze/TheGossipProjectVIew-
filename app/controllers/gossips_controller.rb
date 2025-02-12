@@ -7,7 +7,7 @@ class GossipsController < ApplicationController
   end
 
   def create
-    anonymous_user = User.find_by(first_name: "anonymous") || User.create(first_name: "Anonymous", last_name: "User", email: "anonymous@example.com")
+    anonymous_user = User.find_by(first_name: "anonymous")
     @gossip = Gossip.new(gossip_params)
     @gossip.user = anonymous_user  # Associe le gossip à l'utilisateur anonyme
     if @gossip.save
@@ -20,6 +20,8 @@ class GossipsController < ApplicationController
 
   def show
     @gossip = Gossip.find_by(id: params[:id])
+    @comments = @gossip.comments # Charger tous les commentaires associés au gossip
+    @comment = Comment.new
   end
 
   def edit
