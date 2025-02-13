@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   resources :cities, only: [ :index, :show ]
   resources :gossips do
     resources :comments
+    resources :likes, only: [:create, :index, :destroy]
   end
   resources :session, only: [ :new, :create, :destroy, :index ]
   resources :user, only: [ :create, :new ]
-
 
   get "author_profil/:first_name", to: "author_profil#profil"
 

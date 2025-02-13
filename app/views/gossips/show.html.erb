@@ -104,10 +104,12 @@
     <div class="gossip-container">
         <!-- Header -->
         <div class="gossip-header d-flex justify-content-between align-items-center mb-0">
+            <% if current_user == @gossip.user %>
             <h1 class="h2 mb-0 fw-bold">Potin n°<%= params[:id] %></h1>
             <a href="/gossips/<%= params[:id]%>/edit/" class="edit-link">
                 <i class="bi bi-pencil-square"></i>Éditer
             </a>
+            <%end%>
         </div>
 
         <!-- Carte principale -->

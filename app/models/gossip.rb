@@ -15,4 +15,5 @@ class Gossip < ApplicationRecord
     minimum: 10, maximum: 150,
     message: "Le potin doit faire entre 10 et 150 caractères"
   }
+
 end

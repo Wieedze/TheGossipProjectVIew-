@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    @comment= Comment.find(params[:id])
+    set_comment
   end
 
   # POST /comments or /comments.json
@@ -25,8 +25,8 @@ class CommentsController < ApplicationController
     puts "===== DEBUG PARAMS ====="
     puts params.inspect  # 🔥 Affiche les paramètres reçus dans la console
     puts "========================"
-
-    @comment = Comment.new(comment_params)
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.create(comment_params)
     @comment.gossip = @gossip
     @comment.user = current_user  # Associe le gossip à l'utilisateur anonyme
 
@@ -36,6 +36,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "Le commentaire na pas pue etre ajouté ."
       puts params.inspect
+      render new_session_path
     end
   end
 
@@ -65,11 +66,11 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params.expect(:id))
+      @comment = Comment.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:content)
+        params.require(:comment).permit(:content, :gossip_id, :user_id)
     end
 end

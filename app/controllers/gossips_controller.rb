@@ -1,4 +1,5 @@
 class GossipsController < ApplicationController
+  before_action :authorize_user, only: [:edit, :update]
   def new
     @gossip = Gossip.new
   end
@@ -7,7 +8,6 @@ class GossipsController < ApplicationController
   end
 
   def create
-
     @gossip = Gossip.new(gossip_params)
     @gossip.user = current_user
     if @gossip.save
@@ -17,6 +17,8 @@ class GossipsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+
 
   def show
     @gossip = Gossip.find_by(id: params[:id])
@@ -55,5 +57,13 @@ private
 
   def gossip_params
   params.require(:gossip).permit(:user_id, :title, :content)
+  end
+
+  def authorize_user
+    gossip = Gossip.find(params[:id])
+    unless current_user == gossip.user
+      flash[:danger] = "Tu ne peux pas modifier ce potin !"
+      redirect_to accueil_index_path
+    end
   end
 end
