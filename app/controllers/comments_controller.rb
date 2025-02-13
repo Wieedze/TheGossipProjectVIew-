@@ -28,8 +28,7 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params)
     @comment.gossip = @gossip
-    anonymous_user = User.find_by(first_name: "anonymous")
-    @comment.user = anonymous_user  # Associe le gossip à l'utilisateur anonyme
+    @comment.user = current_user  # Associe le gossip à l'utilisateur anonyme
 
     if @comment.save
       flash[:success] = "Commentaire enregistré avec succès !"

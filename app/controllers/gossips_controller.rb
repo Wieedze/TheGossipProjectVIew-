@@ -7,9 +7,9 @@ class GossipsController < ApplicationController
   end
 
   def create
-    anonymous_user = User.find_by(first_name: "anonymous")
+
     @gossip = Gossip.new(gossip_params)
-    @gossip.user = anonymous_user  # Associe le gossip à l'utilisateur anonyme
+    @gossip.user = current_user
     if @gossip.save
       flash[:success] = "Potin enregistré avec succès !"
       redirect_to @gossip
